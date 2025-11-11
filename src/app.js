@@ -1,29 +1,15 @@
 const express = require("express");
-
+const {adminAuth} = require("./middlewares/auth");
 const app = express();
 
-app.get("/", (req,res) => {
-  res.send("Hello World ")
+app.use("/admin",adminAuth);
+app.get("/admin/getAllData",(req,res) => {
+  res.send("All Data Added");
 });
-
-app.post("/user",(req,res) => {
-  // saved data in database
-  res.send("Data is Added to database")
-});
-
-app.get("/user",(req,res) => {
-  res.send({firstname:"Vinayak", lastname:"Bhat",age:12})
-});
-
-app.delete("/user",(req,res) => {
-  res.send("Data is succesfully deleted");
-});
-
-app.patch("/user",(req,res) => {
-  res.send("Data is replace successfully");
+app.get("/admin/deleteAllData",(req,res) => {
+  res.send("Deleted all the data")
 })
 
-// console.log(app);
 app.listen(3000,() => {
   console.log("Server Started Succesfully on port 3000");
 });
