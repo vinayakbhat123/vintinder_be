@@ -1,0 +1,12 @@
+## Creating express server:
+  - create a repository uisng -> npm init
+  - Initialise the repository
+  - node_modules,package.json,package-lock.json
+  - Install express using -> npm i express
+  - Create a server
+  - listen a server
+  - request handler for /,/test,/hello
+  - Install nodemon  and update script inside package.json using  -> npm i -g nodemon
+  - what are the dependecies
+  - what are the use of "-g" while npm install
+  - Difference between caret and tilde ( ^ vs ~)
