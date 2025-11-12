@@ -1,4 +1,4 @@
-## Creating express server:
+## Steps to create a vintinder website:
   - create a repository uisng -> npm init
   - Initialise the repository
   - node_modules,package.json,package-lock.json
@@ -32,3 +32,16 @@
   - write a dummy auth middleware for admin 
   - write a dummy auth middleware for User routes except user/login 
   - Error handling using app.use("/",(err,req,res,next) => {});
+
+  - create free cluster on monogodb official website(Mongo Altas);
+  - install monogoose library
+  - Connect your application to database / vintinder
+  - call the connectdb function and connect to the database before the application on 7777
+  - Create a userSchema and User Model
+  - create a post /signup api to add database
+  - push some documents to database using  api calls from postman 
+  - Error handling using try and catch
+
+  - JS object vs json (difference)
+  - Add the express.json() middleware to app
+  - make your /signup api  dynamic to receive data from end user(postman or browser)
