@@ -17,6 +17,27 @@ app.post("/signup",async (req,res) => {
  }
 })
 
+// UserOne api :- To get one user from User Model
+app.get("/userone", async (req,res) => {
+  const emailId = req.body.emailId;
+  try {
+    const UserData = await User.findOne({emailId : emailId});
+    res.send(UserData)
+  } catch (error) {
+    res.status(404).send("User not found")
+  }
+})
+
+
+// feed api to get all the user data
+app.get("/feed", async (req,res) => {
+  try {
+    const UserData = await User.find({});
+    res.send(UserData)
+  } catch (error) {
+    res.status(404).send("Somthing went wrong..fe")
+  }
+})
 connectDB()
   .then(() => {
     console.log("Database Connected");
