@@ -1,15 +1,16 @@
 const express = require("express");
-const {adminAuth} = require("./middlewares/auth");
+const {connectDB }= require("./config/database")
 const app = express();
 
-app.use("/admin",adminAuth);
-app.get("/admin/getAllData",(req,res) => {
-  res.send("All Data Added");
-});
-app.get("/admin/deleteAllData",(req,res) => {
-  res.send("Deleted all the data")
-})
+connectDB()
+  .then(() => {
+    console.log("Database Connected");
+    app.listen(3000,() => {
+        console.log("Server Started Succesfully on port 3000");
+   });
+  })
+  .catch((err) => {
+    console.error("Database cannot connected");
+  })
 
-app.listen(3000,() => {
-  console.log("Server Started Succesfully on port 3000");
-});
+
