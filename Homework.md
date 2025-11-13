@@ -47,3 +47,4 @@
   - make your /signup api  dynamic to receive data from end user(postman or browser) 
   - API - get userOne by emailId
   - API - Feed API  - GET /feed - get all the users from database using find() and findOne() filter 
+  - Install dotenv package to use .env and require("dotenv").config(); 
