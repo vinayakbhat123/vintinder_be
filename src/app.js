@@ -27,8 +27,6 @@ app.get("/userone", async (req,res) => {
     res.status(404).send("User not found")
   }
 })
-
-
 // feed api to get all the user data
 app.get("/feed", async (req,res) => {
   try {
@@ -37,6 +35,16 @@ app.get("/feed", async (req,res) => {
   } catch (error) {
     res.status(404).send("Somthing went wrong..fe")
   }
+})
+
+app.delete("/user", async (req,res) =>{
+  const userId = req.body.userId;
+  try {
+    const user = await User.findByIdAndDelete(userId);
+    res.send("User Deleted succesfully..");
+  } catch (error) {
+    res.status(400).send("Somthing went wrong...");
+  } 
 })
 connectDB()
   .then(() => {
