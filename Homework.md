@@ -53,3 +53,9 @@
   - Explore mongoose docs for Model
   - explore Model.findOneAndUpdate option
   - API - Update a user by emailId
+
+  - Explore SchemaTypes option from mongoose docs
+  - Add validation like required,unique,lowercase,min,max,minlength,trim.
+  - Add dafault value
+  - Improve the DB schema Put all validation on each field schema
+  - Add timestamps to the schema
