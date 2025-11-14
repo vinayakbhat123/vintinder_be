@@ -48,3 +48,8 @@
   - API - get userOne by emailId
   - API - Feed API  - GET /feed - get all the users from database using find() and findOne() filter 
   - Install dotenv package to use .env and require("dotenv").config(); 
+  - API - for delete api for user
+  - API - Update a user by Id
+  - Explore mongoose docs for Model
+  - explore Model.findOneAndUpdate option
+  - API - Update a user by emailId

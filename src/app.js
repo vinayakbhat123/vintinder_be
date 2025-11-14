@@ -17,8 +17,8 @@ app.post("/signup",async (req,res) => {
  }
 })
 
-// UserOne api :- To get one user from User Model
-app.get("/userone", async (req,res) => {
+// Get User by email
+app.get("/user", async (req,res) => {
   const emailId = req.body.emailId;
   try {
     const UserData = await User.findOne({emailId : emailId});
@@ -37,6 +37,7 @@ app.get("/feed", async (req,res) => {
   }
 })
 
+// Delete a user from database
 app.delete("/user", async (req,res) =>{
   const userId = req.body.userId;
   try {
@@ -46,6 +47,30 @@ app.delete("/user", async (req,res) =>{
     res.status(400).send("Somthing went wrong...");
   } 
 })
+
+// Update a data  of the user
+app.patch("/user", async (req,res) => {
+   const userId = req.body.userId
+   const data = req.body;
+   try {
+      const user = await User.findByIdAndUpdate(userId,data,{returnDocument: "after"})
+    //  console.log(user)
+     res.send("User Updated successfully")
+   } catch (error) {
+     res.status(400).send("Somthing went wrong...");
+   }
+})
+
+// app.patch("/user",async (req,res) => {
+//   const emailId = req.params.emailId;
+//   const data = req.body;
+//   try {
+//     await User.findOneAndUpdate(emailId,data);
+//     res.send("Data updated ")
+//   } catch (error) {
+//     res.status(400).send("Somthing went wrong...");
+//   }
+// })
 connectDB()
   .then(() => {
     console.log("Database Connected");
