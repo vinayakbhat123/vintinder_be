@@ -59,3 +59,5 @@
   - Add dafault value
   - Improve the DB schema Put all validation on each field schema
   - Add timestamps to the schema
+  - Add api level validation on patch request & sign up api
+  - Data Sanitizing - Add API validation for each field

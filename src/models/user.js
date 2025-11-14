@@ -35,10 +35,10 @@ const userSchema = new Schema({
   gender:{
     type:String,
     validate(value) {
-        if (!["male,female,others"].includes(value)){
-            throw new console.error("Gender data not valid");
+        if(!["male","female,others"].includes(value)) {
+          throw new Error("Gender data not valid")
         }
-    }
+    },
   },
   photoUrl:{
     type:String,
