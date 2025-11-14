@@ -1,30 +1,61 @@
 const express = require("express");
 const {connectDB }= require("./config/database")
 const{ User }= require("./models/user");
+const {ValidateSignUpData} =require("../utils/ValidateData")
+const bcrypt = require("bcrypt")
 const app = express();
 
 app.use(express.json());
-
+// Post SignUp api
 app.post("/signup",async (req,res) => {
-  // creating a new instance of user model
-  const user = new User(req.body);
-  
- try { 
-   await user.save();
-   res.send("User added Successfully")
- } catch (error) {
-   res.status(400).send("Error saving the user:",err.message);
- }
-})
+  try {
+    //  validation of data
+     ValidateSignUpData(req)
+     
+     const {firstName,lastName,emailId,password} = req.body;
+    // Encrypting password
+    const passwordHash = await bcrypt.hash(password,10);
 
+    // creating a new instance of user model
+ 
+    const user = new User({
+      firstName,
+      lastName,
+      emailId,
+      password:passwordHash,
+    }); 
+    await user.save();
+    res.send("User data Saved")
+  } catch (error) {
+    res.status(400).send("Error: "+ error.message)
+  }
+})
+// Login Api
+app.post("/login", async (req,res) => {
+  try {
+    const {emailId,password} = req.body;
+     
+    const user = await User.findOne({emailId:emailId});
+
+    if(!user) throw new Error("Invalid Credentials ");
+
+    const isPasswordValid = bcrypt.compare(password,user.password)
+   
+    if (isPasswordValid) res.send("Login Successfully ")
+    else throw new Error("Invalid Credentials")
+
+  } catch (error) {
+     res.status(400).send("Error: "+ error.message)
+  }
+})
 // Get User by email
 app.get("/user", async (req,res) => {
-  const emailId = req.body.emailId;
-  try {
-    const UserData = await User.findOne({emailId : emailId});
-    res.send(UserData)
+   const emailId = req.body.emailId;
+   try {
+     const UserData = await User.findOne({emailId : emailId});
+     res.send(UserData)
   } catch (error) {
-    res.status(404).send("User not found")
+     res.status(404).send("User not found")
   }
 })
 // feed api to get all the user data

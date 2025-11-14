@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator= require("validator");
 const {Schema} = mongoose
 
 const userSchema = new Schema({
@@ -21,12 +22,20 @@ const userSchema = new Schema({
     unique:true,
     minlength:8,
     maxlength:25,
+    validate(value){
+       if (!validator.isEmail(value)){
+          throw new Error("Enter a valid EmailId.")
+       }
+    },
   },
   password:{
-    type:Number,
+    type:String,
     required:true,
-    min:6,
-    max:12,
+     validate(value){
+       if (!validator.isStrongPassword(value)){
+          throw new Error("Enter a Strong password ")
+       }
+    },
   },
   age:{
     type:String,
@@ -42,7 +51,12 @@ const userSchema = new Schema({
   },
   photoUrl:{
     type:String,
-    default:"",
+    default:"https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg",
+     validate(value){
+       if (!validator.isURL(value)){
+          throw new Error("Enter a valid Photo URL.")
+       }
+    }
   },
   about:{
     type:String,
@@ -52,6 +66,7 @@ const userSchema = new Schema({
   },
   skills:{
     type:[String],
+    maxlength:10,
   }
 },{
   timestamps:true,

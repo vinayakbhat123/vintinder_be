@@ -61,3 +61,11 @@
   - Add timestamps to the schema
   - Add api level validation on patch request & sign up api
   - Data Sanitizing - Add API validation for each field
+
+  - Installed validator
+  - Explore validator function and use validator function for password,emailId,photoURL
+  - validate the signup API - create a validation.js file
+  - Install bcrypt library to to create passwordHash using bcrypt.hash() and user is Encrypted password
+  - Created  login api
+  - compare passwords using bcrypt.comapare() and throw errors if emailId and password does not match
+  
