@@ -69,3 +69,9 @@
   - Created  login api
   - compare passwords using bcrypt.comapare() and throw errors if emailId and password does not match
   
+  - Install cookie-parser -> app.use(cookieParser())
+  - sending dummy cookie to user
+  - create GET /profile api and check if the cookie get back 
+  - Install jwt(jsonwebtoken) 
+  - In login API,after email and password validation,create a JWT token and send it it inside  cookie ->res.cookies("token",token)
+  - read the cookie inside the /profile API and find the logged in user. 
