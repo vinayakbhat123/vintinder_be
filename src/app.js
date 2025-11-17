@@ -1,80 +1,21 @@
 const express = require("express");
-require("dotenv").config();
 const {connectDB }= require("./config/database")
-const{ User }= require("./models/user");
-const {ValidateSignUpData} =require("../utils/ValidateData")
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt")
-const {userAuth} = require("./middlewares/auth")
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
-// Post SignUp api
-app.post("/signup",async (req,res) => {
-  try {
-    //  validation of data
-     ValidateSignUpData(req)
-     
-     const {firstName,lastName,emailId,password} = req.body;
-    // Encrypting password
-    const passwordHash = await bcrypt.hash(password,10);
 
-    // creating a new instance of user model
- 
-    const user = new User({
-      firstName,
-      lastName,
-      emailId,
-      password:passwordHash,
-    }); 
-    await user.save();
-    res.send("User data Saved")
-  } catch (error) {
-    res.status(400).send("Error: "+ error.message)
-  }
-})
-// Login Api
-app.post("/login", async (req,res) => {
-  try {
-    const {emailId,password} = req.body;
-     
-    const user = await User.findOne({emailId:emailId});
+const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile");
+const requestRouter = require("./routes/request");
 
-    if(!user){
-       throw new Error("Invalid Credentials ");}
+app.use("/",authRouter)
+app.use("/",profileRouter)
+app.use("/",requestRouter)
 
-    const isPasswordValid = await user.validatepassword(password);
-   
-    if (isPasswordValid){ 
-      // create a JWT token 
-      const token = await user.getJWt()
-      // Add token to cookie and send response back to user
-      res.cookie("token",token);
-      res.send("Login Successfully ")}
-    else {
-      throw new Error("Invalid Credentials")}
 
-  } catch (error) {
-     res.status(400).send("Error: "+ error.message)
-  }
-})
 
-//  Get profile of the user
-app.get("/profile",userAuth, async (req,res) => {
-  try {
-    const user = req.user;
-    res.send(user)
-   }catch (error) {
-      res.status(400).send("Invalid Credentials Please Login ")
-   }
-})
-// POST sendconnectionRequest 
-app.post("/sendconnectionrequest",userAuth,(req,res) => {
-  const user = req.user;
-  res.send(user.firstName +"sended connection Request ")
-})
 
 connectDB()
   .then(() => {
