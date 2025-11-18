@@ -93,3 +93,17 @@
   - create a PATCH /profile/update API 
   - create a PATCH /profile/password API 
   - make validate for every post,patch api
+  - create a connectionRequest Schema
+  - send  ConnectionRequest API 
+  - proper validation of data 
+  - $or query and $and query in mongoose
+  - Schema.pre("save") function 
+  - Read more about indexes in mongodb
+  - why do we need index in db
+  - what is advantages and disadvantages of creating index
+  - Read more about compound indexes
+
+  - create /request/review/:status/:requestId with proper validation
+  - Read about ref and populate function
+  - Created GET /user/request/received APIs checked  all validations
+  - Created GET /user/connections APIs chcked all validations
