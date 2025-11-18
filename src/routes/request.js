@@ -4,8 +4,13 @@ const {userAuth} = require("../middlewares/auth")
 
 // POST sendconnectionRequest 
 requestRouter.post("/sendconnectionrequest",userAuth,(req,res) => {
-  const user = req.user;
-  res.send(user.firstName + "  sended connection Request ")
+  try {
+    const user = req.user;
+    res.send(user.firstName + "  sended connection Request ")
+  } catch (error) {
+     res.status(400).send("Invalid Credentials Please Login ")
+  }
+
 })
 
 module.exports = {
