@@ -107,3 +107,6 @@
   - Read about ref and populate function
   - Created GET /user/request/received APIs checked  all validations
   - Created GET /user/connections APIs chcked all validations
+  
+  -Logic fo GET /fedd API 
+  -Explore $nin and $ne and others query operator in mongodb
