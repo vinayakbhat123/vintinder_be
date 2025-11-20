@@ -108,5 +108,8 @@
   - Created GET /user/request/received APIs checked  all validations
   - Created GET /user/connections APIs chcked all validations
   
-  -Logic fo GET /fedd API 
-  -Explore $nin and $ne and others query operator in mongodb
+  - Logic fo GET /fedd API 
+  - Explore $nin and $ne and others query operator in mongodb
+  - Install cors 
+  - Add to app.js => app.use(cors())
+  - cors({origin,credentials})
