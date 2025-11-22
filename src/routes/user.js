@@ -11,14 +11,12 @@ userRouter.get("/user/request/received",userAuth, async (req,res) => {
     const connectionRequest = await ConnectionRequestModel.find({
         toUserId:loggedInUser._id,
         status:"interested"
-      }).populate("fromUserId",["firstName","lastName","photoUrl","gender","age","skills"])
-    if(!connectionRequest) {
-      return res.json({message:"user request not found"})
+      }).populate("fromUserId",["firstName","lastName","photoUrl","gender","age","skills","about"])
+    if(!connectionRequest || connectionRequest.length === 0 ) {
+      throw new Error("User Data Not Found")
+      // return res.jso({message:"user request not found"})
     }
-    res.json({
-      message:"Data Fetched Successfully",
-      data:connectionRequest,
-    })  
+    res.send(connectionRequest)  
   } catch (error) {
       res.status(400).send("ERROR:" +error.message)
     }
