@@ -53,7 +53,7 @@ const userSchema = new Schema({
   },
   photoUrl:{
     type:String,
-    default:"https://images.pexels.com/photos/270637/pexels-photo-270637.jpeg",
+    default:"https://cdn.pixabay.com/photo/2018/04/18/18/56/user-3331256_1280.png",
      validate(value){
        if (!validator.isURL(value)){
           throw new Error("Enter a valid Photo URL.")
