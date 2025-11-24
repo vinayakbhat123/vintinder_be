@@ -1,11 +1,12 @@
 const express = require("express");
 const {connectDB }= require("./config/database")
+require("dotenv").config()
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const app = express();
 
 app.use(cors({
-  origin:"https://vintinder-web.vercel.app/",
+  origin:"https://vintinder-web.vercel.app",
   credentials:true,
 }))
 app.use(express.json());
@@ -27,7 +28,7 @@ app.use("/",userRouter)
 connectDB()
   .then(() => {
     console.log("Database Connected");
-    app.listen(3000,() => {
+    app.listen(process.env.port,() => {
         console.log("Server Started Succesfully on port 3000");
    });
   })
