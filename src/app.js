@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors({
-  origin:"https://vintinder-web.vercel.app",
+  origin:"",
   credentials:true,
 }))
 app.use(express.json());
@@ -24,11 +24,11 @@ app.use("/",userRouter)
 
 
 
-
+const port = process.env.PORT || 3000;
 connectDB()
   .then(() => {
     console.log("Database Connected");
-    app.listen(process.env.port,() => {
+    app.listen(port,() => {
         console.log("Server Started Succesfully on port 3000");
    });
   })
