@@ -3,7 +3,11 @@ const mongoose = require("mongoose");
 
 
 const connectDB = async () => {
-   await mongoose.connect(process.env.MONGODB_CLUSTER);
+  try {
+    await mongoose.connect(process.env.MONGODB_CLUSTER);
+  } catch (error) {
+   console.log("Database not connected",error.message)
+  }
 }
 
 module.exports = {connectDB}
