@@ -1,34 +1,37 @@
 const express = require("express");
 const {connectDB }= require("./config/database")
-require("dotenv").config()
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+require("dotenv").config()
+require(".././utils/cronjob")
 const app = express();
 
 app.use(cors({
-  origin:"",
+  origin:"http://localhost:5173",
   credentials:true,
 }))
 app.use(express.json());
-app.use(cookieParser());
+app.use(cookieParser());  
 
 const {authRouter} = require("./routes/auth");
 const {profileRouter} = require("./routes/profile");
 const {requestRouter} = require("./routes/request");
 const { userRouter } = require("./routes/user");
+const {paymentRouter} = require("./routes/payment")
 
 app.use("/",authRouter)
 app.use("/",profileRouter)
 app.use("/",requestRouter)
 app.use("/",userRouter)
+app.use("/",paymentRouter)
 
 
 
-const port = process.env.PORT || 3000;
+// const port = process.env.PORT || 3000;
 connectDB()
   .then(() => {
     console.log("Database Connected");
-    app.listen(port,() => {
+    app.listen(3000,() => {
         console.log("Server Started Succesfully on port 3000");
    });
   })
