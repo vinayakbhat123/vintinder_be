@@ -5,8 +5,11 @@ const cors = require("cors");
 require("dotenv").config()
 require(".././utils/cronjob")
 const app = express();
+const http = require("http")
+const initialsocket = require("../utils/socket")
 
-app.use(cors({
+app.use(
+  cors({
   origin:"http://localhost:5173",
   credentials:true,
 }))
@@ -25,13 +28,15 @@ app.use("/",requestRouter)
 app.use("/",userRouter)
 app.use("/",paymentRouter)
 
+const server = http.createServer(app);
+initialsocket(server)
 
 
 // const port = process.env.PORT || 3000;
 connectDB()
   .then(() => {
     console.log("Database Connected");
-    app.listen(3000,() => {
+    server.listen(3000,() => {
         console.log("Server Started Succesfully on port 3000");
    });
   })
