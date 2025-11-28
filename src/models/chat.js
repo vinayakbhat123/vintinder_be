@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const messageSchema = new mongoose.Schema({
-  senderID:{
+  senderId:{
     type:mongoose.Schema.Types.ObjectId,
     ref:"User",
     required:true,
@@ -13,13 +13,13 @@ const messageSchema = new mongoose.Schema({
 {timestamps:true});
 
 const chatSchema = new mongoose.Schema({
-  participants:{
+  participants:[{
     type:mongoose.Schema.Types.ObjectId,
     ref:"User",
     required:true,
-  },
-  messages:[],
-})
+  }],
+  messages:[messageSchema],
+},{timestamps:true})
 
 const Chat = new mongoose.model("Chat",chatSchema)
 
