@@ -6,13 +6,13 @@ const userAuth = async (req,res,next) => {
     const cookies = req.cookies;
     const {token} = cookies;
     if(!token) {
-       res.status(401).send("Token Expired Please Login")
+       return res.status(401).send("Token Expired Please Login")
     }
     const decodedData = await jwt.verify(token,process.env.JWT_SECRET_KEY) 
     const {_id} = decodedData
     const user =await User.findById(_id)
     if (!user) {
-       throw new Error("User not Found please Login ")
+       return res.status(401).send("Invalid User")
     } 
     req.user = user;
     next()
